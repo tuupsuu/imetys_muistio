@@ -28,14 +28,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,18 +40,53 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _openAddDialog,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
+
+  void _openAddDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Mitä lisätään?"),
+          content: Column(
+            children: [
+              TextButton(
+                onPressed: () => _addMilk(),
+                child: Text("Maito"),
+              ),
+              TextButton(
+                onPressed: () => _addPoop(),
+                child: Text("Pissa/kakka"),
+              ),
+              TextButton(
+                onPressed: () => _addClean(),
+                child: Text("Puhdistus"),
+              ),
+              TextButton(
+                onPressed: () => _addCustom(),
+                child: Text("Muu"),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _addPoop() {}
+
+  void _addMilk() {}
+
+  void _addClean() {}
+
+  void _addCustom() {}
 }
