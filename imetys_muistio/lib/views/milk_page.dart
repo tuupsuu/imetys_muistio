@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imetys_muistio/config/database_helper.dart';
 import 'package:imetys_muistio/types/milk.dart';
 import 'package:imetys_muistio/widgets/custom_app_bar.dart';
 
@@ -96,7 +97,7 @@ class _MyHomePageState extends State<MilkPage> {
     }
   }
 
-  void saveMilk() {
+  void saveMilk() async {
     Milk newMilk = Milk(
       type,
       amountController.text as int,
@@ -105,5 +106,7 @@ class _MyHomePageState extends State<MilkPage> {
     commentController.dispose();
     amountController.dispose();
     super.dispose();
+
+    await DatabaseHelper.instance.createMilk(newMilk.toMap());
   }
 }
