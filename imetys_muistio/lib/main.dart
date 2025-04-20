@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:imetys_muistio/widgets/add_entry.dart';
+import 'package:imetys_muistio/widgets/custom_app_bar.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -10,11 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Imetysmuistio',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Merkinnät'),
     );
   }
 }
@@ -31,21 +33,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      appBar: CustomAppBar('Lisää maito'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-          ],
+          children: <Widget>[const Text('Lisää merkintä plus näppäimestä')],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _openAddDialog,
-        tooltip: 'Increment',
+        tooltip: 'Lisää',
         child: const Icon(Icons.add),
       ),
     );
@@ -55,38 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Mitä lisätään?"),
-          content: Column(
-            children: [
-              TextButton(
-                onPressed: () => _addMilk(),
-                child: Text("Maito"),
-              ),
-              TextButton(
-                onPressed: () => _addPoop(),
-                child: Text("Pissa/kakka"),
-              ),
-              TextButton(
-                onPressed: () => _addClean(),
-                child: Text("Puhdistus"),
-              ),
-              TextButton(
-                onPressed: () => _addCustom(),
-                child: Text("Muu"),
-              ),
-            ],
-          ),
-        );
+        return AddEntry();
       },
     );
   }
-
-  void _addPoop() {}
-
-  void _addMilk() {}
-
-  void _addClean() {}
-
-  void _addCustom() {}
 }
